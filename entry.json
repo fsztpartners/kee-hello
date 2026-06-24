@@ -1,0 +1,52 @@
+{
+  "$comment": "keemakr Marketplace submission for the kee-hello agent. This is the EntrySubmission the platform's registerEntry() ingests (see keemakr-core src/lib/marketplace/types.ts). Installing it for a tenant creates the 'hello' department + its single agent, gated on the one required connection (Hunter.io) below.",
+
+  "slug": "kee-hello",
+  "display_name": "Kee Hello",
+  "description": "A tiny demo agent: give it text and it greets and shouts it back in capitals. The smallest possible Marketplace entry — one agent, one tool, one required connection.",
+  "category": "utility",
+  "author": "fszt",
+  "icon": "megaphone",
+  "visibility": "public",
+
+  "runtime": {
+    "kind": "eve",
+    "ref": "https://github.com/fsztpartners/kee-hello",
+    "status": "declared"
+  },
+
+  "manifest": {
+    "department": {
+      "key": "hello",
+      "label": "Hello",
+      "description": "A one-agent demo department that greets and shouts text."
+    },
+    "agents": [
+      {
+        "key": "shouter",
+        "display_name": "Shouter",
+        "role": "Greets and shouts text",
+        "description": "Prepends a greeting and returns the text uppercased. Has a single tool (shout); no database, no subagents.",
+        "config": {
+          "tool": "shout",
+          "max_input_chars": 280
+        }
+      }
+    ],
+    "meta": {
+      "eve_root_agent": "agent/agent.ts",
+      "tools": ["shout"]
+    }
+  },
+
+  "dependencies": [
+    {
+      "kind": "connection",
+      "provider": "hunter",
+      "required": true,
+      "reason": "Demonstrates the install gate: the agent stays in 'pending_deps' until the tenant connects Hunter.io. (The demo transform itself does not call Hunter — this is the smallest real required dependency to exercise the round-trip.)"
+    }
+  ],
+
+  "changelog": "Initial release — greet + shout text transform."
+}
