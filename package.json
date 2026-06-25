@@ -16,6 +16,7 @@
   "dependencies": {
     "@ai-sdk/anthropic": "4.0.0-beta.67",
     "eve": "0.13.0",
+    "jose": "^6.2.3",
     "zod": "4.4.3"
   },
   "devDependencies": {
