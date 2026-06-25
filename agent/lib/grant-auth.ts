@@ -79,6 +79,10 @@ export function grantAuth(): AuthFn<Request> {
           via: "grant",
           tenant_id: tenantId,
           scopes: scopes.map(String),
+          // Stash the raw grant so useKee(ctx) can forward it to the Capability
+          // API. It is short-lived (~120s) and kept server-side in the auth
+          // context — never exposed to the model.
+          grant_token: token,
           ...(typeof traceId === "string" ? { trace_id: traceId } : {}),
         },
       } satisfies SessionAuthContext;
