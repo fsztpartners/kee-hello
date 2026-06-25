@@ -3,7 +3,7 @@
 
   "slug": "kee-hello",
   "display_name": "Kee Hello",
-  "description": "A tiny demo agent: give it text and it greets and shouts it back in capitals. The smallest possible Marketplace entry — one agent, one tool, one required connection.",
+  "description": "A tiny demo agent: greets and shouts text, and finds work emails via Hunter.io. The smallest Marketplace entry that uses a real tenant connection end to end.",
   "category": "utility",
   "author": "keemakr",
   "icon": "megaphone",
@@ -25,17 +25,17 @@
       {
         "key": "shouter",
         "display_name": "Shouter",
-        "role": "Greets and shouts text",
-        "description": "Prepends a greeting and returns the text uppercased. Has a single tool (shout); no database, no subagents.",
+        "role": "Greets and shouts text; finds work emails",
+        "description": "Greets and shouts text (shout), and finds a person's work email at a company domain via Hunter.io (find-email). No database, no subagents.",
         "config": {
-          "tool": "shout",
+          "tools": ["shout", "find-email"],
           "max_input_chars": 280
         }
       }
     ],
     "meta": {
       "eve_root_agent": "agent/agent.ts",
-      "tools": ["shout"]
+      "tools": ["shout", "find-email"]
     }
   },
 
@@ -44,9 +44,10 @@
       "kind": "connection",
       "provider": "hunter",
       "required": true,
-      "reason": "Demonstrates the install gate: the agent stays in 'pending_deps' until the tenant connects Hunter.io. (The demo transform itself does not call Hunter — this is the smallest real required dependency to exercise the round-trip.)"
+      "access": "proxy",
+      "reason": "Used by the find-email tool to look up work emails. The tenant connects their own Hunter.io key; the agent calls it through keemakr's capability proxy and never sees the key."
     }
   ],
 
-  "changelog": "Initial release — greet + shout text transform."
+  "changelog": "Add find-email (Hunter.io) — the agent now uses its declared connection end to end via @keemakr/tools + @keemakr/agent-sdk."
 }
