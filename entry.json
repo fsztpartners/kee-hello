@@ -5,13 +5,13 @@
   "display_name": "Kee Hello",
   "description": "A tiny demo agent: give it text and it greets and shouts it back in capitals. The smallest possible Marketplace entry — one agent, one tool, one required connection.",
   "category": "utility",
-  "author": "fszt",
+  "author": "keemakr",
   "icon": "megaphone",
   "visibility": "public",
 
   "runtime": {
     "kind": "eve",
-    "ref": "https://github.com/fsztpartners/kee-hello",
+    "ref": "https://github.com/keemakrpartners/kee-hello",
     "status": "declared"
   },
 
