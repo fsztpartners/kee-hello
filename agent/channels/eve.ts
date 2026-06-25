@@ -5,7 +5,7 @@ import {
   vercelOidc,
 } from "eve/channels/auth";
 import { eveChannel } from "eve/channels/eve";
-import { grantAuth } from "../lib/grant-auth";
+import { grantAuth } from "@keemakr/agent-sdk";
 
 // The single HTTP entrypoint. Channels are root-only in eve and therefore live
 // here.
