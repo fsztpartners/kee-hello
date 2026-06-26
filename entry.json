@@ -1,6 +1,5 @@
 {
   "$comment": "keemakr Marketplace submission for the kee-hello agent. This is the EntrySubmission the platform's registerEntry() ingests (see keemakr-core src/lib/marketplace/types.ts). Installing it for a tenant creates the 'hello' department + its single agent, gated on the one required connection (Hunter.io) below.",
-
   "slug": "kee-hello",
   "display_name": "Kee Hello",
   "description": "A tiny demo agent: greets and shouts text, and finds work emails via Hunter.io. The smallest Marketplace entry that uses a real tenant connection end to end.",
@@ -8,13 +7,12 @@
   "author": "keemakr",
   "icon": "megaphone",
   "visibility": "public",
-
+  "changelog": "Add find-email (Hunter.io) — the agent now uses its declared connection end to end via @keemakr/tools + @keemakr/agent-sdk.",
   "runtime": {
     "kind": "eve",
-    "ref": "https://github.com/keemakrpartners/kee-hello",
+    "ref": "https://github.com/fsztpartners/kee-hello",
     "status": "declared"
   },
-
   "manifest": {
     "department": {
       "key": "hello",
@@ -28,17 +26,22 @@
         "role": "Greets and shouts text; finds work emails",
         "description": "Greets and shouts text (shout), and finds a person's work email at a company domain via Hunter.io (find-email). No database, no subagents.",
         "config": {
-          "tools": ["shout", "find-email"],
+          "tools": [
+            "shout",
+            "find-email"
+          ],
           "max_input_chars": 280
         }
       }
     ],
     "meta": {
       "eve_root_agent": "agent/agent.ts",
-      "tools": ["shout", "find-email"]
+      "tools": [
+        "shout",
+        "find-email"
+      ]
     }
   },
-
   "dependencies": [
     {
       "kind": "connection",
@@ -47,7 +50,5 @@
       "access": "proxy",
       "reason": "Used by the find-email tool to look up work emails. The tenant connects their own Hunter.io key; the agent calls it through keemakr's capability proxy and never sees the key."
     }
-  ],
-
-  "changelog": "Add find-email (Hunter.io) — the agent now uses its declared connection end to end via @keemakr/tools + @keemakr/agent-sdk."
+  ]
 }
